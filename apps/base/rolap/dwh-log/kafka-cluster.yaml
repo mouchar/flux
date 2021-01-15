@@ -1,0 +1,58 @@
+apiVersion: kafka.strimzi.io/v1beta1
+kind: Kafka
+metadata:
+  namespace: rolap
+  name: dwh-log
+spec:
+  kafka:
+    version: 2.6.0
+    replicas: 3
+    listeners:
+      - name: plain
+        port: 9092
+        type: nodeport
+        tls: false
+        configuration:
+          bootstrap:
+            nodePort: 32200
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: na1-dwh-log-bootstrap.ii.prodgdc.com.
+              external-dns.alpha.kubernetes.io/ttl: "60"
+          brokers:
+          - broker: 0
+            nodePort: 32100
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: na1-dwh-log-0.ii.prodgdc.com.
+              external-dns.alpha.kubernetes.io/ttl: "60"
+          - broker: 1
+            nodePort: 32101
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: na1-dwh-log-1.ii.prodgdc.com.
+              external-dns.alpha.kubernetes.io/ttl: "60"
+          - broker: 2
+            nodePort: 32102
+            annotations:
+              external-dns.alpha.kubernetes.io/hostname: na1-dwh-log-2.ii.prodgdc.com.
+              external-dns.alpha.kubernetes.io/ttl: "60"
+    config:
+      offsets.topic.replication.factor: 3
+      transaction.state.log.replication.factor: 3
+      transaction.state.log.min.isr: 2
+      log.segment.bytes: 104857600
+      log.message.format.version: "2.6"
+    storage:
+      type: persistent-claim
+      size: 1Gi
+      #class: microk8s-hostpath
+      deleteClaim: false
+#    rack:
+#      topologyKey: topology.kubernetes.io/zone
+  zookeeper:
+    replicas: 3
+    storage:
+      type: persistent-claim
+      size: 1Gi
+      deleteClaim: false
+  entityOperator:
+    topicOperator: {}
+    userOperator: {}

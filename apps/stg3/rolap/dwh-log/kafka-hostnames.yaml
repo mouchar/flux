@@ -1,0 +1,13 @@
+- op: replace
+  path: /spec/kafka/listeners/0/configuration/bootstrap/annotations/external-dns.alpha.kubernetes.io~1hostname
+  value: stg3-dwh-log-bootstrap.ii.prodgdc.com.
+- op: replace
+  path: /spec/kafka/listeners/0/configuration/brokers/0/annotations/external-dns.alpha.kubernetes.io~1hostname
+  value: stg3-dwh-log-0.ii.prodgdc.com.
+- op: replace
+  path: /spec/kafka/listeners/0/configuration/brokers/1/annotations/external-dns.alpha.kubernetes.io~1hostname
+  value: stg3-dwh-log-1.ii.prodgdc.com.
+- op: replace
+  path: /spec/kafka/listeners/0/configuration/brokers/2/annotations/external-dns.alpha.kubernetes.io~1hostname
+  value: stg3-dwh-log-2.ii.prodgdc.com.
+

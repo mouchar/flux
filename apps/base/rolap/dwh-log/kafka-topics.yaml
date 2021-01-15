@@ -1,0 +1,54 @@
+---
+apiVersion: kafka.strimzi.io/v1beta1
+kind: KafkaTopic
+metadata:
+  # metadata.name can't contain underscore, so we must
+  # define the name using spec.topicName below
+  name: dwh-data
+  labels:
+    strimzi.io/cluster: dwh-log
+spec:
+  topicName: dwh_data
+  partitions: 45
+  replicas: 3
+  config:
+    retention.ms: 1209600000
+---
+apiVersion: kafka.strimzi.io/v1beta1
+kind: KafkaTopic
+metadata:
+  name: dwh-control
+  labels:
+    strimzi.io/cluster: dwh-log
+spec:
+  topicName: dwh_control
+  partitions: 15
+  replicas: 3
+  config:
+    retention.ms: 1209600000
+---
+apiVersion: kafka.strimzi.io/v1beta1
+kind: KafkaTopic
+metadata:
+  name: dwh-status-change
+  labels:
+    strimzi.io/cluster: dwh-log
+spec:
+  topicName: dwh_status_change
+  partitions: 45
+  replicas: 3
+  config:
+    retention.ms: 1209600000
+---
+apiVersion: kafka.strimzi.io/v1beta1
+kind: KafkaTopic
+metadata:
+  name: dwh-control-status-change
+  labels:
+    strimzi.io/cluster: dwh-log
+spec:
+  topicName: dwh_control_status_change
+  partitions: 15
+  replicas: 3
+  config:
+    retention.ms: 1209600000

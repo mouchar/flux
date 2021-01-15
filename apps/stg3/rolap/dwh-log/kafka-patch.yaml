@@ -1,0 +1,13 @@
+apiVersion: kafka.strimzi.io/v1beta1
+kind: Kafka
+metadata:
+  name: dwh-log
+  namespace: rolap
+spec:
+  kafka:
+    config:
+      log.message.format.version: "2.6"
+      log.segment.bytes: 104857600
+      offsets.topic.replication.factor: 3
+      transaction.state.log.min.isr: 2
+      transaction.state.log.replication.factor: 3

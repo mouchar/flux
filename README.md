@@ -23,18 +23,18 @@ Follow the steps in [documentation](https://toolkit.fluxcd.io/get-started/#insta
 
 ## Install Flux to cluster
 Asuming you want to integrate with your Github account:
+1. Fork this repositiory to your personal account
+1. Run the following command:
 ```
-git clone https://github.com/mouchar/flux
-
 export GITHUB_TOKEN=<your-github-token>
 flux bootstrap github --owner=<your-github-name> \
-  --repository=<your-repo-name> \
+  --repository=flux \
   --branch=master \
   --path=./clusters/stg3
   --personal
   --token-auth
 ```
-Command will create repo github.com/<your-github-name>/<your-repo-name>
+Command will create repo `github.com/<your-github-name>/flux`
 and installs FluxCD components to cluster.
 
 ## Wait and watch what happens
@@ -45,4 +45,10 @@ Then kafka-related custom resources will be installed (after kustomize
 transformation valid for stg3 cluster) and Kafka cluster comes to life
 and Kafka topics are registred.
 
+## Clone your repo and play
+Clone your forked repo and do some changes. Refer documentation for examples,
+how the Flux CLI help you when creating new resources. Or you can modify existing ones,
+it's up to you.
 
+When you finish your changes, commit them to your git repo. Eventually, the Flux source
+controller will notice the repo change and trigger requested actions.

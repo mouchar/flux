@@ -1,0 +1,32 @@
+apiVersion: v1
+entries:
+  gooddata-cn:
+  - apiVersion: v2
+    appVersion: 1.1.0
+    created: "2021-05-15T17:56:29.193351712+02:00"
+    dependencies:
+    - condition: deployPostgresHA
+      import-values:
+      - child: service
+        parent: pgpool
+      name: postgresql-ha
+      repository: https://charts.bitnami.com/bitnami
+      version: 6.3.3
+    - condition: deployRedisHA
+      import-values:
+      - child: redis
+        parent: redis
+      - child: sentinel
+        parent: sentinel
+      name: redis-ha
+      repository: https://dandydeveloper.github.io/charts
+      version: 4.12.1
+    description: A Helm chart for the GoodData.CN
+    digest: db9994c690e459089db87e1697ba3a71963e20c2afe9d7b97bd91f4ddd8edfd9
+    home: https://gitlab.com/gooddata/gdc-nas
+    name: gooddata-cn
+    type: application
+    urls:
+    - https://github.com/mouchar/flux/releases/download/gooddata-cn-1.1.0/gooddata-cn-1.1.0.tgz
+    version: 1.1.0
+generated: "2021-05-15T17:56:29.193381654+02:00"
